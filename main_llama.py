@@ -40,7 +40,7 @@ model_dict = {"baichuan": "baichuan_13B",
               "chatglm":"chatglm2_6b",
               "vicuna":"vicuna-7b"}
 
-prompts = json.load(open("data/msc_dialogue/prompts.json", "r"))
+prompts = json.load(open("data/msc/msc/msc_dialogue/prompts.json", "r"))
 
 def build_model(args):
     model, tokenizer = None, None

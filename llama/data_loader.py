@@ -183,7 +183,7 @@ def count_data(path_name):
 
 def prepare_test_data(args):
     if args.dataset == "msc":
-        path_test = f'data/msc_dialogue/session_{args.session_id}/test.txt'
+        path_test = f'data/msc/msc/msc_dialogue/session_{args.session_id}/test.txt'
         data_test = read_msc_data(args, path_test)
         test_dataset = MSCDataset(args, data_test)
     elif args.dataset == "carecall":

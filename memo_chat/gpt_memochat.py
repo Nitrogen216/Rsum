@@ -26,7 +26,7 @@ TaskTarLen = {
 }
 
 client = OpenAI(
-    api_key="xxxxxx"
+    api_key = "sk-REDACTED"
 )
 
 prompts = json.load(open(prompt_path, "r"))

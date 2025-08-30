@@ -7,10 +7,10 @@ from tqdm import tqdm
 import random
 random.seed(42)
 
-prompts = json.load(open("data/msc_dialogue/prompts.json", "r"))
+prompts = json.load(open("data/msc/msc/msc_dialogue/prompts.json", "r"))
 
 client = OpenAI(
-    api_key="xxxxxx",
+    api_key = "sk-REDACTED",
 )
 def gpt_response_results(prompt, model_name):
     for _ in range(100):

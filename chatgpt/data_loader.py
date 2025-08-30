@@ -141,7 +141,7 @@ def load_example(args, path_name):
     with open(path_name, "r") as f:
         raw_data = [json.loads(line.strip()) for line in f]
 
-    summaries = json.load(open("data/msc_dialogue/sessionlevel_summaries_subsample5.json", "r"))
+    summaries = json.load(open("data/msc/msc/msc_dialogue/sessionlevel_summaries_subsample5.json", "r"))
 
     data = []
 
@@ -198,9 +198,9 @@ def load_example(args, path_name):
 
 def prepare_test_data(args):
     if args.dataset == "msc":
-        path_test = f'data/msc_dialogue/session_{args.session_id}/test.txt'
+        path_test = f'data/msc/msc/msc_dialogue/session_{args.session_id}/test.txt'
         data_test = read_msc_data(args, path_test)
-        path_valid = f'data/msc_dialogue/session_2/valid.txt'
+        path_valid = f'data/msc/msc/msc_dialogue/session_2/valid.txt'
         examples = load_example(args, path_valid)
     elif args.dataset == "carecall":
         path_test = f'data/carecall/carecall-memory_en_auto_translated.json'
@@ -225,9 +225,9 @@ def collate_fn(data, tokenizer):
 
 def prepare_data(args, tokenizer):
     if args.dataset == "msc":
-        path_train = f'data/msc_dialogue/session_{args.session_id}/train.txt'
-        path_dev = f'data/msc_dialogue/session_{args.session_id}/valid.txt'
-        path_test = f'data/msc_dialogue/session_{args.session_id}/test.txt'
+        path_train = f'data/msc/msc/msc_dialogue/session_{args.session_id}/train.txt'
+        path_dev = f'data/msc/msc/msc_dialogue/session_{args.session_id}/valid.txt'
+        path_test = f'data/msc/msc/msc_dialogue/session_{args.session_id}/test.txt'
     elif args.dataset == "carecall":
         path_train = f'data/carecall/carecall-memory_en_auto_translated.json'
 

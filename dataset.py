@@ -21,7 +21,7 @@ class RSumDataset(Dataset):
         """Reads source and target sequences from txt files."""
         self.data = data
         self.args = args
-        self.prompts = json.load(open("data/msc_dialogue/prompts.json", "r"))
+        self.prompts = json.load(open("data/msc/msc/msc_dialogue/prompts.json", "r"))
         self.prompt = "You are an advanced AI designed for engaging in natural, personality-based conversations. You will be provided with a memory, containing the personal preferences and experiences of speakers (the assistant and the user), as well as a dialogue context. When responding, consider maintaining a conversational and fluent tone. Responses should be contextually relevant, consistent with given memory, aiming to keep the conversation flowing. Human queries are labeled 'User:', while your replies are marked 'Assistant:'. Your goal is to provide engaging and coherent responses based on the dialogue context provided. The response is in the form of text and cannot contain emoticons or special characters.The following is the case you need to test:\n The test memory is:{prev_memory}\nThe test dialogue context is:{dialog}\nSo the response to the user is: Assistant:"
         self.example_prompt = self.prompts["gpt-3.5-turbo"]["example1"]
     def __getitem__(self, index):
@@ -44,7 +44,7 @@ class SumDataset(Dataset):
         """Reads source and target sequences from txt files."""
         self.data = data
         self.args = args
-        self.prompts = json.load(open("data/msc_dialogue/prompts.json", "r"))
+        self.prompts = json.load(open("data/msc/msc/msc_dialogue/prompts.json", "r"))
         self.prompt = "You are an advanced AI designed for engaging in natural, personality-based conversations. You will be provided with a memory, containing the personal preferences and experiences of speakers (the assistant and the user), as well as a dialogue context. When responding, consider maintaining a conversational and fluent tone. Responses should be contextually relevant, consistent with given memory, aiming to keep the conversation flowing. Human queries are labeled 'User:', while your replies are marked 'Assistant:'. Your goal is to provide engaging and coherent responses based on the dialogue context provided. The response is in the form of text and cannot contain emoticons or special characters.The following is the case you need to test:\n The test memory is:{prev_memory}\nThe test dialogue context is:{dialog}\nSo the response to the user is: Assistant:"
         self.example_prompt = predefined_prompts["gpt-3.5-turbo"]["example"]
     def __getitem__(self, index):

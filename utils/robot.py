@@ -5,7 +5,7 @@ import time, tiktoken
 import httpx
 
 client = OpenAI(
-    api_key="xxxxxx",
+    api_key = "sk-REDACTED",
 )
 def gpt_response_results(args, prompt, model_name):
     for i in range(10):

@@ -1,6 +1,6 @@
 import openai
 import backoff
-api_key = "xxxxxx"
+api_key = "sk-REDACTED"
 @backoff.on_exception(backoff.expo, openai.error.RateLimitError)
 def completions_with_backoff(**kwargs):
     return openai.ChatCompletion.create(**kwargs)

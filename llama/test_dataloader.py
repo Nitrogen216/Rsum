@@ -166,7 +166,7 @@ def collate_fn(batch):
 
 def prepare_test_data(args):
     if args.dataset == "msc":
-        path_test = f'data/msc_dialogue/session_{args.session_id}/test.txt'
+        path_test = f'data/msc/msc/msc_dialogue/session_{args.session_id}/test.txt'
         data_test = read_msc_data(args, path_test)
         test_dataset = MSCDataset(args, data_test)
     elif args.dataset == "carecall":
@@ -278,7 +278,7 @@ def sum_collate_fn(batch, args):
     return {"input": inputs, "label": labels, "dial_ids":dial_ids, "prev_summary": prev_sums}
 
 def prepare_rsum_data(args):
-    path_test = f'data/msc_dialogue/session_{args.session_id}/test.txt'
+    path_test = f'data/msc/msc/msc_dialogue/session_{args.session_id}/test.txt'
     data_test = read_rsum_data(args, path_test, "test")
     test_dataset = RSumDataset(data_test, args.local_rank, split='test')
     test_loader = DataLoader(test_dataset, batch_size=args.test_batch_size, 
@@ -343,7 +343,7 @@ def read_rsum_data(args, path_name, dtype):
     return data
    
 def prepare_test_sum_data(args):
-    path_test = f'data/msc_dialogue/session_{args.session_id}/test.txt'
+    path_test = f'data/msc/msc/msc_dialogue/session_{args.session_id}/test.txt'
     data_test = read_test_sum_data(args, path_test, "test")
     test_dataset = SumDataset(data_test, args.local_rank, split='test')
     #sampler = DistributedSampler(test_dataset, shuffle=False)

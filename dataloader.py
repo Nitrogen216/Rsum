@@ -213,9 +213,9 @@ def read_msc_data(args, path_name):
 
 def prepare_data(args, tokenizer):
     if args.dataset == "msc":
-        path_train = f'data/msc_dialog/session_{args.session_id}/train.txt'
-        path_dev = f'data/msc_dialog/session_{args.session_id}/valid.txt'
-        path_test = f'data/msc_dialog/session_{args.session_id}/test.txt'
+        path_train = f'data/msc/msc/msc_dialogue/session_{args.session_id}/train.txt'
+        path_dev = f'data/msc/msc/msc_dialogue/session_{args.session_id}/valid.txt'
+        path_test = f'data/msc/msc/msc_dialogue/session_{args.session_id}/test.txt'
 
         data_train = read_msc_data(args, path_train)
         data_dev = read_msc_data(args, path_dev)
@@ -240,9 +240,9 @@ def prepare_data(args, tokenizer):
 
 def prepare_sum_data(args):
 
-    path_train = f'data/msc_personasummary/session_{args.session_id}/train.txt'
-    path_dev = f'data/msc_personasummary/session_{args.session_id}/valid.txt'
-    path_test = f'data/msc_personasummary/session_{args.session_id}/test.txt'
+    path_train = f'data/msc/msc/msc_personasummary/session_{args.session_id}/train.txt'
+    path_dev = f'data/msc/msc/msc_personasummary/session_{args.session_id}/valid.txt'
+    path_test = f'data/msc/msc/msc_personasummary/session_{args.session_id}/test.txt'
 
     data_train = read_sum_data(args, path_train, "train")
     data_dev = read_sum_data(args, path_dev, "dev")
@@ -332,7 +332,7 @@ def read_msc_test_data(args, dtype):
         dict_persona = "User: "+ user_persona+" Assistant: "+assistant_persona
         return dict_persona
     
-    path_name = f'data/msc_dialogue/session_{args.session_id}/{dtype}.txt'
+    path_name = f'data/msc/msc/msc_dialogue/session_{args.session_id}/{dtype}.txt'
     with open(path_name, "r") as f:
         raw_data = [json.loads(line.strip()) for line in f]
 
@@ -401,7 +401,7 @@ def read_msc_test_data(args, dtype):
             all_content.append(f'{prefix}: {turn["text"]}')
 
     if args.mode in ['rag', 'rag_mem']:
-        rag_file = f"data/msc_dialogue/session_{args.session_id}/dpr_topk_3.json"
+        rag_file = f"data/msc/msc/msc_dialogue/session_{args.session_id}/dpr_topk_3.json"
         data = read_rag_data(args, data, rag_file)
     #import pdb; pdb.set_trace()
     if args.mode == 'sum':
@@ -508,7 +508,7 @@ def read_sum_test_data(args, dtype):
         dict_persona = {"user persona":user_persona, "assistant persona":assistant_persona}
         return str(dict_persona)
 
-    path_name = f'data/msc_dialogue/session_{args.session_id}/{dtype}.txt'
+    path_name = f'data/msc/msc/msc_dialogue/session_{args.session_id}/{dtype}.txt'
     with open(path_name, "r") as f:
         raw_data = [json.loads(line.strip()) for line in f]
 

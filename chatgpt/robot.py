@@ -3,8 +3,8 @@ import backoff
 import os
 import re, time
 from openai import OpenAI
-api_key = "xxxxxx"
-client = OpenAI(api_key="xxxxxx")
+api_key = "sk-REDACTED"
+client = OpenAI(api_key="sk-REDACTED")
 def gpt_summary_results(args, prompt):
     for i in range(100):
         try:

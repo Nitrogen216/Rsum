@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(/Volumes/SAMSUNG/PhD/**)",
+      "WebSearch",
+      "Bash(pip install:*)",
+      "Bash(python:*)",
+      "Bash(curl:*)",
+      "Bash(git clone:*)",
+      "Bash(find:*)",
+      "Read(/Volumes/SAMSUNG/PhD/**)",
+      "Read(/var/folders/mz/7tc9ydx12z1dzb593wy1rhcw0000gn/T/TemporaryItems/NSIRD_screencaptureui_1rOkgt/**)",
+      "Read(/Volumes/SAMSUNG/PhD/**)",
+      "Read(/Volumes/SAMSUNG/PhD/**)",
+      "Read(/Volumes/SAMSUNG/PhD/**)",
+      "Read(/Volumes/SAMSUNG/PhD/**)",
+      "Read(/Volumes/SAMSUNG/PhD/**)",
+      "WebFetch(domain:parl.ai)",
+      "Read(/Volumes/SAMSUNG/PhD/**)",
+      "Read(/Volumes/SAMSUNG/PhD/**)",
+      "Read(/Volumes/SAMSUNG/PhD/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

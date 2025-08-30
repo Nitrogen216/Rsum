@@ -12,7 +12,7 @@ from rag import retrieval_content
 DEFINED_PROMPT="You are an advanced AI designed for engaging in a personality-based conversations. You will be provided with personal preferences and experiences of speakers (the assistant and the user), and a dialogue context. When responding, consider maintaining a conversational and fluent tone. Responses should be contextually relevant, consistent with given memory, aiming to keep the conversation flowing. Human queries are labeled 'User:', while your replies are marked 'Assistant:'. Your goal is to provide engaging and coherent responses based on the dialogue context. The response is in the form of text and cannot contain emoticons or special characters.The following is the case you need to test:\nThe personality is:{persona}\nThe memory is:{history}\nThe test dialogue context is:{dialog}\nSo the response to the user is: Assistant:"
 
 client = OpenAI(
-    api_key="xxxxxxx",
+    api_key = "sk-REDACTED",
 )
 
 def gpt_response_results(prompt):

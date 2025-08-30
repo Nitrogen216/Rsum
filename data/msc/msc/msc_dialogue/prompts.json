@@ -1,0 +1,10 @@
+{
+  "gpt-3.5-turbo": {
+    "gen_response_with_memory": "You are having a conversation. Use the previous memory: {prev_memory}. Current dialog: {dialog}. Your response:",
+    "gen_response_with_memory_example": "Example: {example}. Use the previous memory: {prev_memory}. Current dialog: {dialog}. Your response:",
+    "gen_memory1": "Previous memory: {prev_memory}. New dialog: {dialog}. Updated memory:",
+    "example1": "This is an example conversation.",
+    "example2": "This is another example.",
+    "example3": "This is a third example."
+  }
+}

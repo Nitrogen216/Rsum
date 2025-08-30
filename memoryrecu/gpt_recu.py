@@ -12,7 +12,7 @@ DEFINED_PROMPT="You are an advanced AI designed for engaging in natural an d per
 
 
 client = OpenAI(
-    api_key='xxxxx',
+    api_key = "sk-REDACTED",
 )
 
 def gpt_response_results(prompt, model_name):
