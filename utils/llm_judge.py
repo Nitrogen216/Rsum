@@ -9,9 +9,8 @@ random.seed(42)
 
 prompts = json.load(open("data/msc/msc/msc_dialogue/prompts.json", "r"))
 
-client = OpenAI(
-    api_key = "sk-REDACTED",
-)
+from utils.env import ensure_openai_api_key
+client = OpenAI(api_key=ensure_openai_api_key())
 def gpt_response_results(prompt, model_name):
     for _ in range(100):
         try:
@@ -148,4 +147,3 @@ def load_eval_file(args):
     with open(f'{args.logger_file}', 'a') as f:
         f.write(str(args)+"\n")
         f.write(str(conditions)+"\n")
-

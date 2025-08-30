@@ -1,74 +1,42 @@
 #!/usr/bin/env python3
 """
 自动设置 OpenAI API 密钥的工具脚本
+
+现在默认把密钥写入项目根目录的 .env 文件：
+  OPENAI_API_KEY=sk-...
+
+代码会从 .env 或环境变量中读取密钥，不再在源码中硬编码。
 """
 import argparse
 import os
 import re
 from pathlib import Path
 
-def setup_api_key(api_key):
-    """在所有需要的文件中设置API密钥"""
-    
-    files_to_update = [
-        "chatgpt/robot.py",
-        "chatgpt/direct_generation.py",
-        "utils/robot.py", 
-        "utils/llm_judge.py",
-        "memo_chat/gpt_memochat.py",
-        "memorybank/gpt_memorybank.py",
-        "memorybank/question_memorybank.py", 
-        "memorybank/retrieval_memorybank.py",
-        "memoryrecu/gpt_recu.py"
-    ]
-    
-    updated_files = []
-    
-    for file_path in files_to_update:
-        full_path = Path(file_path)
-        
-        if not full_path.exists():
-            print(f"⚠️  文件不存在: {file_path}")
-            continue
-            
-        try:
-            # 读取文件内容
-            with open(full_path, 'r', encoding='utf-8') as f:
-                content = f.read()
-            
-            # 替换API密钥
-            patterns = [
-                r'api_key\s*=\s*["\']x+["\']',  # api_key = "xxxxxx"
-                r'api_key\s*=\s*["\'][^"\']*["\']',  # api_key = "any-key"
-                r'OpenAI\(api_key\s*=\s*["\']x+["\']\)',  # OpenAI(api_key="xxxxxx")
-                r'OpenAI\(api_key\s*=\s*["\'][^"\']*["\']\)'  # OpenAI(api_key="any-key")
-            ]
-            
-            replacements = [
-                f'api_key = "{api_key}"',
-                f'api_key = "{api_key}"', 
-                f'OpenAI(api_key="{api_key}")',
-                f'OpenAI(api_key="{api_key}")'
-            ]
-            
-            original_content = content
-            
-            for pattern, replacement in zip(patterns, replacements):
-                content = re.sub(pattern, replacement, content)
-            
-            # 如果内容有变化，写回文件
-            if content != original_content:
-                with open(full_path, 'w', encoding='utf-8') as f:
-                    f.write(content)
-                updated_files.append(file_path)
-                print(f"✅ 更新: {file_path}")
-            else:
-                print(f"🔍 检查: {file_path} (无需更新)")
-                
-        except Exception as e:
-            print(f"❌ 错误处理 {file_path}: {e}")
-    
-    return updated_files
+
+def write_dotenv(api_key: str, dotenv_path: str = ".env") -> Path:
+    """Write OPENAI_API_KEY to a .env file in the project root."""
+    path = Path(dotenv_path)
+    try:
+        if path.exists():
+            # Update or append OPENAI_API_KEY
+            lines = path.read_text(encoding="utf-8").splitlines()
+            found = False
+            new_lines = []
+            for line in lines:
+                if line.strip().startswith("OPENAI_API_KEY="):
+                    new_lines.append(f"OPENAI_API_KEY={api_key}")
+                    found = True
+                else:
+                    new_lines.append(line)
+            if not found:
+                new_lines.append(f"OPENAI_API_KEY={api_key}")
+            path.write_text("\n".join(new_lines) + "\n", encoding="utf-8")
+        else:
+            path.write_text(f"OPENAI_API_KEY={api_key}\n", encoding="utf-8")
+        print(f"✅ 已写入 {dotenv_path} (OPENAI_API_KEY)")
+    except Exception as e:
+        print(f"❌ 无法写入 {dotenv_path}: {e}")
+    return path
 
 def setup_environment_variable(api_key):
     """设置环境变量"""
@@ -100,27 +68,23 @@ def setup_environment_variable(api_key):
 def main():
     parser = argparse.ArgumentParser(description="设置 OpenAI API 密钥")
     parser.add_argument("--api-key", required=True, help="你的 OpenAI API 密钥")
-    parser.add_argument("--env-var", action="store_true", help="同时设置环境变量")
+    parser.add_argument("--env-var", action="store_true", help="同时设置 shell 环境变量 (~/.zshrc 等)")
     
     args = parser.parse_args()
     
     print("🔧 开始设置 OpenAI API 密钥...")
     print("=" * 50)
-    
-    # 更新代码文件中的API密钥
-    updated_files = setup_api_key(args.api_key)
-    
-    print("\n" + "=" * 50)
-    print(f"📊 总结:")
-    print(f"✅ 成功更新 {len(updated_files)} 个文件")
+
+    # 写入 .env
+    write_dotenv(args.api_key)
     
     if args.env_var:
-        print("\n🌍 设置环境变量...")
+        print("\n🌍 设置 shell 环境变量...")
         setup_environment_variable(args.api_key)
     
     print("\n🎉 API 密钥设置完成!")
     print("\n📝 接下来的步骤:")
-    print("1. 如果设置了环境变量，请重启终端或运行: source ~/.bashrc")
+    print("1. 将 .env 加入版本控制忽略 (已在 .gitignore 配置)")
     print("2. 运行第一个实验: python run_first_experiment.py")
     print("3. 或手动运行: python main_chatgpt.py --dataset msc --session_id 5 --mode rsum")
 

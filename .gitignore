@@ -1,0 +1,15 @@
+# Local environment variables
+.env
+
+# Python
+__pycache__/
+*.pyc
+
+# Outputs
+save_*/
+save_msc/
+
+# Data caches or large raw files (keep data/ minimal)
+data/**/raw/
+*.log
+

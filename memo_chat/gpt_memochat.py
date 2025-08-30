@@ -25,9 +25,8 @@ TaskTarLen = {
     "retrieval_topiocqa": 32
 }
 
-client = OpenAI(
-    api_key = "sk-REDACTED"
-)
+from utils.env import ensure_openai_api_key
+client = OpenAI(api_key=ensure_openai_api_key())
 
 prompts = json.load(open(prompt_path, "r"))
 
@@ -179,5 +178,4 @@ def run_memochat(args, test_dataset):
     wfile= os.path.join(args.saving_dir, f"{args.operation}_sid{args.session_id}.json")
     with open(wfile,"w", encoding='utf-8') as f: 
         f.write(json.dumps(pred_dicts, ensure_ascii=False, indent=4))  
-
 

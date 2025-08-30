@@ -10,24 +10,22 @@ from pathlib import Path
 
 def check_api_key():
     """检查API密钥是否已设置"""
-    
+    # 优先从 .env 加载（延用 utils.env 逻辑）
+    try:
+        from utils.env import load_dotenv
+        load_dotenv()
+    except Exception:
+        pass
+
     # 检查环境变量
     env_key = os.getenv('OPENAI_API_KEY')
-    if env_key and env_key != 'your-actual-api-key-here':
-        print("✅ 发现环境变量中的API密钥")
+    if env_key:
+        print("✅ 已检测到 OPENAI_API_KEY (环境变量/.env)")
         return True
-    
-    # 检查代码文件中的密钥
-    robot_file = Path("chatgpt/robot.py")
-    if robot_file.exists():
-        with open(robot_file, 'r') as f:
-            content = f.read()
-            if 'api_key = "xxxxxx"' not in content and 'api_key="xxxxxx"' not in content:
-                print("✅ 发现代码文件中的API密钥")
-                return True
-    
+
     print("❌ 未找到有效的API密钥")
-    print("请先运行: python setup_api.py --api-key 'your-openai-api-key'")
+    print("请先在项目根目录创建 .env 并写入: OPENAI_API_KEY=sk-... ")
+    print("或运行: python setup_api.py --api-key 'your-openai-api-key'")
     return False
 
 def check_dependencies():
@@ -130,7 +128,7 @@ def main():
         return False
         
     # 检查数据集
-    if not os.path.exists("data/msc_dialogue/session_5/test.txt"):
+    if not os.path.exists("data/msc/msc/msc_dialogue/session_5/test.txt"):
         print("❌ 数据集未找到")
         print("请先运行数据集下载脚本")
         return False

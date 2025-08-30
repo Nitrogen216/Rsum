@@ -14,9 +14,16 @@
   ```bash
   pip install torch transformers openai tiktoken nltk bert-score rouge numpy pandas tqdm openpyxl
   ```
-- Configure API:
+- Configure API (use .env):
   ```bash
-  python setup_api.py --api-key "sk-..."   # or: export OPENAI_API_KEY=...
+  # Option A: create .env in project root
+  echo "OPENAI_API_KEY=sk-..." > .env
+
+  # Option B: helper script writes .env for you
+  python setup_api.py --api-key "sk-..."
+
+  # Optional: also export in your shell (persistent)
+  # python setup_api.py --api-key "sk-..." --env-var
   ```
 - Quick smoke test:
   ```bash
@@ -52,7 +59,10 @@
 - PRs: description, motivation, commands used, sample logs/metrics, affected flags/files; link issues. Do not commit secrets, large data, or generated artifacts.
 
 ## Security & Configuration Tips
-- Never hardcode API keys; use `setup_api.py` or `OPENAI_API_KEY`.
+- Never hardcode API keys. Place them in `.env` (ignored by git) or export `OPENAI_API_KEY`.
 - Keep `data/` minimal; add large/raw files to `.gitignore`.
 - Note GPU/VRAM needs when adding models or increasing `--max_seq_length`.
 
+## Notes
+- The codebase loads `OPENAI_API_KEY` via `utils/env.py` (minimal `.env` loader). See `.env.example`.
+- `.env` is ignored by git (see `.gitignore`).
